@@ -39,7 +39,7 @@ class TicTacToe:
         return "Draw"
 
     def next_move(self):
-        digits = '0123456789'
+        digits = '123'
         coords = input("Enter the coordinates: ").split()
         if len(coords) != 2 or coords[0] not in digits or coords[1] not in digits:
             print("You should enter numbers!")
