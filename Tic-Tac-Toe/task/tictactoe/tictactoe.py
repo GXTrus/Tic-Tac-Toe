@@ -56,8 +56,7 @@ class TicTacToe:
             return False
 
     def check_coord(self):
-        if 'X' in self.current_state[self.coord_y][self.coord_x] or \
-                'O' in self.current_state[self.coord_y][self.coord_x]:
+        if ' ' not in self.current_state[self.coord_y][self.coord_x]:
             return False
         return True
 
