@@ -20,13 +20,17 @@ class TicTacToe:
         count__ = 9 - count_o - count_x
         # check horizontal and vertical lines
         for i in range(3):
-            if self.current_state[i][0] == self.current_state[i][1] == self.current_state[i][2] == ('X' or 'O'):
+            if self.current_state[i][0] == self.current_state[i][1] == self.current_state[i][2] == 'X' or \
+                    self.current_state[i][0] == self.current_state[i][1] == self.current_state[i][2] == 'O':
                 win_list.add(self.current_state[i][0])
-            if self.current_state[0][i] == self.current_state[1][i] == self.current_state[2][i] == ('X' or 'O'):
+            if self.current_state[0][i] == self.current_state[1][i] == self.current_state[2][i] == 'X' or \
+                    self.current_state[0][i] == self.current_state[1][i] == self.current_state[2][i] == 'O':
                 win_list.add(self.current_state[0][i])
         # check diagonals
-        if self.current_state[0][0] == self.current_state[1][1] == self.current_state[2][2] == ('X' or 'O') or \
-                self.current_state[0][2] == self.current_state[1][1] == self.current_state[2][0] == ('X' or 'O'):
+        if self.current_state[0][0] == self.current_state[1][1] == self.current_state[2][2] == 'X' or \
+                self.current_state[0][0] == self.current_state[1][1] == self.current_state[2][2] == 'O' or \
+                self.current_state[0][2] == self.current_state[1][1] == self.current_state[2][0] == 'X' or \
+                self.current_state[0][2] == self.current_state[1][1] == self.current_state[2][0] == 'O':
             win_list.add(self.current_state[1][1])
         # difference > 1 or both side wins
         if abs(count_x - count_o) > 1 or len(win_list) > 1:
@@ -42,7 +46,7 @@ class TicTacToe:
 
     def next_move(self):
         coords = ''.join(input("Enter the coordinates: ").split())
-        if not coords.isdigit():
+        if not coords.isdigit() or len(coords) != 2:
             print("You should enter numbers!")
             return False
         self.coord_x, self.coord_y = int(coords[0]) - 1, 3 - int(coords[1])
@@ -72,15 +76,16 @@ class TicTacToe:
         game.show_table()
         game_ = True
         while game_:
+            game_state = self.check_game_state()
+            if game_state.endswith('wins') or game_state == 'Draw':
+                game_ = False
+                print(game_state)
+                continue
             next_player = True
             while next_player:
                 next_player = not game.next_move()
             game.show_table()
             self.change_player()
-            game_state = self.check_game_state()
-            if game_state.endswith('wins') or game_state == 'Draw':
-                game_ = False
-                print(game_state)
 
 
 game = TicTacToe()
