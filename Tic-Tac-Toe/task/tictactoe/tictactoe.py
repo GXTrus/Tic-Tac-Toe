@@ -20,17 +20,13 @@ class TicTacToe:
         count__ = 9 - count_o - count_x
         # check horizontal and vertical lines
         for i in range(3):
-            if self.current_state[i][0] == self.current_state[i][1] == self.current_state[i][2] == 'X' or \
-                    self.current_state[i][0] == self.current_state[i][1] == self.current_state[i][2] == 'O':
+            if self.current_state[i][0] == self.current_state[i][1] == self.current_state[i][2] != ' ':
                 win_list.add(self.current_state[i][0])
-            if self.current_state[0][i] == self.current_state[1][i] == self.current_state[2][i] == 'X' or \
-                    self.current_state[0][i] == self.current_state[1][i] == self.current_state[2][i] == 'O':
+            if self.current_state[0][i] == self.current_state[1][i] == self.current_state[2][i] != ' ':
                 win_list.add(self.current_state[0][i])
         # check diagonals
-        if self.current_state[0][0] == self.current_state[1][1] == self.current_state[2][2] == 'X' or \
-                self.current_state[0][0] == self.current_state[1][1] == self.current_state[2][2] == 'O' or \
-                self.current_state[0][2] == self.current_state[1][1] == self.current_state[2][0] == 'X' or \
-                self.current_state[0][2] == self.current_state[1][1] == self.current_state[2][0] == 'O':
+        if self.current_state[0][0] == self.current_state[1][1] == self.current_state[2][2] != ' ' or \
+                self.current_state[0][2] == self.current_state[1][1] == self.current_state[2][0] != ' ':
             win_list.add(self.current_state[1][1])
         # difference > 1 or both side wins
         if abs(count_x - count_o) > 1 or len(win_list) > 1:
